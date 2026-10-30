@@ -16,16 +16,23 @@ jobs:
     name: APK (assembleRelease)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
 
+      # O pacote "tools" nao existe mais no repositorio do SDK e o padrao da
+      # action ainda o pede (falhava com "Failed to find package 'tools'").
       - name: SDK do Android
         uses: android-actions/setup-android@v3
+        with:
+          packages: >-
+            platform-tools
+            platforms;android-36
+            build-tools;36.0.0
 
       # Sem keystore.properties o build cai para a chave de debug (ver
       # app/build.gradle.kts): a CI prova que o projeto compila, sem guardar
@@ -35,7 +42,7 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Guardar o APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: apk-release
           path: android/app/build/outputs/apk/release/app-release.apk
@@ -45,9 +52,9 @@ jobs:
     name: Protocolo (agente simulado)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 

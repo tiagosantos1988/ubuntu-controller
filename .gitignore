@@ -14,3 +14,8 @@ __pycache__/
 
 # Sistema
 .DS_Store
+
+# assinatura da release (nunca versionar)
+android/keystore.properties
+*.jks
+*.keystore

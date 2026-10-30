@@ -107,6 +107,8 @@ udev/                      regra que libera /dev/uinput para a sessão
 
 ## Como usar
 
+**[⬇ Baixar o APK (1.0.0)](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)** — assinado com a chave de release.
+
 ### Requisitos
 
 - **Ubuntu** com GNOME (testado no 26.04 e no GNOME 50, sessão Wayland) e Python 3.10+;
@@ -133,9 +135,11 @@ use *Sair* no menu do ícone.
 
 ### 2. No celular
 
-Compile com `cd android && ./gradlew assembleDebug` — o APK sai em
-`android/app/build/outputs/apk/debug/`. Instale no celular (o sistema pede para permitir
-"fontes desconhecidas") e abra. Na primeira vez, aponte a câmera para o
+Baixe o APK da **[última release](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)**
+— ou compile: `cd android && ./gradlew assembleRelease` (o APK sai em
+`android/app/build/outputs/apk/release/`, e a assinatura vem de `android/keystore.properties`,
+que não é versionado). Instale no celular (o sistema pede para permitir "fontes
+desconhecidas") e abra. Na primeira vez, aponte a câmera para o
 **QR code** da janela do Ubuntu — ou digite IP, porta e token à mão.
 
 O QR carrega `CR1|ip|porta|token`, um formato curto de propósito: 37 módulos, mais fácil
@@ -282,7 +286,6 @@ python3 teste_dois_controles.py # dois celulares, dois controles, sem interferê
 
 - **É para a rede local.** Não há TLS: quem tiver o token na mesma rede controla a máquina
   como se fosse o teclado físico. **Não exponha a porta 8765 na internet.**
-- **O APK é assinado com a chave de debug** — serve para sideload, não para loja.
 - **Sem force feedback**: o dispositivo virtual não expõe `EV_FF`.
 - **O botão PS pode ser capturado** pelo Steam ou pelo GNOME antes de chegar ao jogo.
 - **Abra o jogo depois de conectar os celulares**: controle que aparece com o jogo já

@@ -107,7 +107,7 @@ udev/                      regra que libera /dev/uinput para a sessão
 
 ## Como usar
 
-**[⬇ Baixar o APK (1.0.0)](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)** — assinado com a chave de release.
+**[⬇ Baixar o APK](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)** — a versão mais recente, assinada com a chave de release.
 
 ### Requisitos
 

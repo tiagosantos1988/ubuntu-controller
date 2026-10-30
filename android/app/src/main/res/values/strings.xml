@@ -8,6 +8,7 @@
     <string name="status_conectando">connecting…</string>
     <string name="status_desconectado">offline</string>
     <string name="erro_token">token refused</string>
+    <string name="erro_sem_controle">all 4 controllers in use</string>
     <string name="erro_servidor">not the agent</string>
     <string name="erro_sem_resposta">no response</string>
     <string name="erro_conectar">can\'t connect</string>

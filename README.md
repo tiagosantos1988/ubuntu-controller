@@ -295,6 +295,11 @@ python3 teste_dois_controles.py # dois celulares, dois controles, sem interferê
 
 - **Não conecta** — IP mudou, agente parado, ou o roteador tem isolamento de clientes
   (AP isolation). O log do agente fica em `~/.local/state/controle-remoto/agente.log`.
+- **"os 4 controles estão em uso"** — os quatro gamepads virtuais têm dono. O app tenta de
+  novo a cada 3 s e entra sozinho quando uma vaga abre; se demorar, veja quem está
+  conectado no log do agente. Um celular que sai da rede sem se despedir (app fechado à
+  força, fora do alcance do Wi-Fi) libera a vaga em ~85 s pelo *keepalive* do TCP — antes
+  o controle ficava preso para sempre.
 - **Conecta mas nada acontece** — falta a regra udev, ou falta logout/login para a ACL
   valer. Confira com `test -w /dev/uinput`.
 - **Cursor lento ou rápido demais** — sensibilidade na engrenagem do topo.

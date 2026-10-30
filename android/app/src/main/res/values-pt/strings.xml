@@ -6,6 +6,7 @@
     <string name="status_conectando">conectando…</string>
     <string name="status_desconectado">desconectado</string>
     <string name="erro_token">token recusado</string>
+    <string name="erro_sem_controle">os 4 controles estao em uso</string>
     <string name="erro_servidor">não é o agente</string>
     <string name="erro_sem_resposta">sem resposta</string>
     <string name="erro_conectar">sem conexão</string>

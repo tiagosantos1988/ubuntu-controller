@@ -99,13 +99,24 @@ class Conexao(
 
                 val resposta = entrada.readLine() ?: ""
                 if (!resposta.contains("\"ola\"")) {
+                    val semControle = resposta.contains("sem_controle")
                     _estado.value = Estado.Falha(
                         contexto.getString(
-                            if (resposta.contains("token")) R.string.erro_token
-                            else R.string.erro_servidor
+                            when {
+                                resposta.contains("token") -> R.string.erro_token
+                                semControle -> R.string.erro_sem_controle
+                                else -> R.string.erro_servidor
+                            }
                         )
                     )
-                    return
+                    // Token errado depende de alguem mexer na configuracao:
+                    // insistir so faria barulho. As outras recusas (vagas
+                    // ocupadas, resposta estranha) podem passar sozinhas, entao
+                    // volta para o laco em vez de desistir de vez -- era isso
+                    // que deixava a tela parada em "nao e o agente".
+                    if (resposta.contains("token")) return
+                    delay(if (semControle) 3000 else 1000)
+                    continue
                 }
 
                 _controle.value = Regex("\"controle\"\\s*:\\s*(\\d+)")
@@ -124,10 +135,26 @@ class Conexao(
                     var vivo = true
                     val leitor = launch(Dispatchers.IO) {
                         try {
-                            while (entrada.readLine() != null) { /* ignora avisos */ }
+                            while (true) {
+                                val linha = entrada.readLine() ?: break
+                                // o agente pergunta se ainda estamos aqui; a
+                                // resposta vai pela mesma fila dos comandos para
+                                // nao escrever no socket de dois lugares
+                                if (linha.contains("\"ping\"")) {
+                                    fila.trySend("{\"t\":\"pong\"}")
+                                }
+                            }
                         } catch (_: Exception) {
                         } finally {
                             vivo = false
+                        }
+                    }
+                    // um comando a cada 25 s mantem a sessao viva mesmo quando
+                    // ninguem esta tocando a tela
+                    val pulso = launch(Dispatchers.IO) {
+                        while (isActive) {
+                            delay(25_000L)
+                            fila.trySend("{\"t\":\"ping\"}")
                         }
                     }
 
@@ -140,6 +167,7 @@ class Conexao(
                         }
                     } finally {
                         leitor.cancel()
+                        pulso.cancel()
                     }
                 }
             } catch (e: CancellationException) {

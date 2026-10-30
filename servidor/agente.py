@@ -261,6 +261,21 @@ class Agente:
         slot: int | None = None
         _log(f"conexao de {endereco}")
 
+        # Um celular pode sumir sem fechar o socket (app desinstalado, saiu do
+        # alcance do Wi-Fi). Sem isso a vaga do controle ficava presa para
+        # sempre e o proximo aparelho ouvia "sem controle livre". O keepalive e'
+        # respondido pelo kernel do celular, entao um cliente vivo mas parado
+        # nao e' derrubado -- so o que realmente desapareceu.
+        try:
+            sock = writer.get_extra_info("socket")
+            if sock is not None:
+                sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+                sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, 45)
+                sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, 10)
+                sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, 4)
+        except OSError:
+            pass
+
         async def enviar(obj: dict) -> None:
             writer.write((json.dumps(obj, ensure_ascii=False) + "\n").encode())
             await writer.drain()
@@ -289,7 +304,15 @@ class Agente:
             slot = self._reservar_slot()
             if slot is None:
                 _log(f"sem controle livre para {endereco}")
-                await enviar({"t": "erro", "msg": f"limite de {LIMITE_CONTROLES} controles"})
+                await enviar(
+                    {
+                        "t": "erro",
+                        # o app usa o motivo para dizer "todos em uso" em vez de
+                        # "nao e o agente", que nao ajudava em nada
+                        "motivo": "sem_controle",
+                        "msg": f"limite de {LIMITE_CONTROLES} controles",
+                    }
+                )
                 return
             self._slots_livres.discard(slot)
 

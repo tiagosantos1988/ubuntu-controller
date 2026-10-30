@@ -5,7 +5,8 @@ Resumo compacto para retomar o trabalho sem reler o histórico.
 ## O que é
 
 **Ubuntu Controller** — celular como teclado/mouse/**gamepad** de um
-Ubuntu conectado à TV, por Wi-Fi.
+computador com Ubuntu, por Wi-Fi. Nao depende de tela: funciona com o PC
+ligado a qualquer monitor, projetor ou nenhum.
 Dois lados: **app Android** (Kotlin/Compose) e **app de bandeja no Ubuntu**
 (Python + GTK4/libadwaita), que roda o agente de injeção.
 Três abas no app: Touchpad, Teclado e Joystick.
@@ -89,7 +90,7 @@ adb install -r controle-remoto.apk
 
 ## Pendências / ideias em aberto
 
-- Leitura do QR na TV a ~3 m não foi validada por mim (só o código em si).
+- Leitura do QR a ~3 m de distancia nao foi validada por mim (so o codigo em si).
 - Modo Joystick testado no emulador e no Galaxy A33 (SM-A336M) por depuracao
   Wi-Fi: L2/L1/triangulo/xis/PS/D-pad/analogico chegaram ao /dev/input do PC com
   os codigos certos, e a vibracao tocou. Falta a prova dentro de um jogo real.

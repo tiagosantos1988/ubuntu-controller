@@ -1,6 +1,6 @@
 # Ubuntu Controller
 
-**O celular como teclado, touchpad e gamepad de um Ubuntu ligado à TV — por Wi-Fi, sem dongle, sem Bluetooth e sem instalar driver no PC.**
+**O celular como teclado, touchpad e gamepad de um computador com Ubuntu — por Wi-Fi, sem dongle, sem Bluetooth e sem instalar driver no PC.**
 
 ![Plataformas](https://img.shields.io/badge/plataformas-Android%20%C2%B7%20Ubuntu-4FC3F7?style=flat-square)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.1-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
@@ -16,9 +16,10 @@
 
 ## Por que existe
 
-Meu computador fica ligado à TV da sala. Para usar de fato — abrir um vídeo, procurar
-um arquivo, jogar — eu precisava de mouse e teclado no sofá, e nenhuma solução pronta
-resolvia bem:
+Meu computador é a máquina de trabalho e a de lazer, e nem sempre eu estou na frente dele:
+tem hora que estou no sofá, tem hora que estou do outro lado do ambiente, tem hora que
+preciso mexer nele durante uma apresentação. Nesses momentos eu precisava de mouse e
+teclado em mãos, e nenhuma solução pronta resolvia bem:
 
 - **apps de controle por Bluetooth HID** esbarram no perfil limitado do Android: nada de
   gamepad, dificuldade com acentos e pareamento que se desfaz sozinho;
@@ -27,7 +28,8 @@ resolvia bem:
 - **teclados sem fio** resolvem metade do problema e somam mais um aparelho para carregar.
 
 A ideia foi simples: o celular já está no bolso, já tem teclado, tela de toque e já está
-na mesma rede Wi-Fi. Faltava só fazê-lo conversar com o PC.
+na mesma rede Wi-Fi. Faltava só fazê-lo conversar com o PC — e a tela onde o Ubuntu
+aparece não muda nada: basta a máquina aceitar entrada de teclado, mouse e gamepad.
 
 ## O que ele faz
 

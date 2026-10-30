@@ -19,3 +19,6 @@ __pycache__/
 android/keystore.properties
 *.jks
 *.keystore
+
+# pacote .deb gerado
+dist/

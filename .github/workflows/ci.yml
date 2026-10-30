@@ -48,6 +48,37 @@ jobs:
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 
+  deb:
+    name: Pacote .deb
+    runs-on: ubuntu-latest
+    # em tag, o pacote vai para a release daquele tag
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Empacotar
+        run: ./empacotar-deb.sh
+
+      - name: Conferir o pacote
+        run: |
+          dpkg-deb -I dist/ubuntu-controller_*_all.deb
+          echo "--- conteudo"
+          dpkg-deb -c dist/ubuntu-controller_*_all.deb | awk '{print $1, $6}'
+
+      - name: Guardar o .deb
+        uses: actions/upload-artifact@v5
+        with:
+          name: deb
+          path: dist/*.deb
+          if-no-files-found: error
+
+      - name: Anexar na release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${GITHUB_REF_NAME}" dist/*.deb --clobber
+
   protocolo:
     name: Protocolo (agente simulado)
     runs-on: ubuntu-latest

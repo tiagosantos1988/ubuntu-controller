@@ -118,23 +118,46 @@ udev/                      regra que libera /dev/uinput para a sessão
 - **Android 8.0+** (`minSdk 26`) para o app;
 - para compilar o app: JDK 17 — o Gradle vem pelo wrapper (`./gradlew`).
 
-### 1. No Ubuntu (uma vez)
+### 1. No Ubuntu
+
+Baixe o `.deb` da **[última release](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)**
+e instale:
 
 ```bash
-sudo ./liberar-uinput.sh     # regra udev que dá acesso ao /dev/uinput
-./instalar-app.sh            # app na bandeja + início automático
+sudo apt install ./ubuntu-controller_1.0.1_all.deb
 ```
 
-O primeiro pede sua senha; o segundo não. Depois disso o agente sobe junto com a sessão e
-o ícone aparece na barra superior. Para conferir se liberou:
+Um comando resolve tudo: dependências (`python3-evdev`, `python3-gi`, GTK4, libadwaita),
+o atalho no menu, os ícones e a **regra do `/dev/uinput`** — que entra como
+`TAG+="uaccess"`, então vale na hora, sem logout e sem adicionar ninguém a grupo nenhum.
+
+Depois abra **Ubuntu Controller** no menu e ligue *Iniciar com o Ubuntu* na janela.
+
+Para conferir se o `/dev/uinput` ficou acessível:
 
 ```bash
 test -w /dev/uinput && echo liberado
 ```
 
-O app do Ubuntu fica em segundo plano, com **instância única** (abrir pelo menu só traz a
-janela para frente). Fechar a janela não encerra: volta para a bandeja — para sair de vez,
-use *Sair* no menu do ícone.
+O app fica em segundo plano, com **instância única** (abrir pelo menu só traz a janela para
+frente). Fechar a janela não encerra: volta para a bandeja — para sair de vez, use *Sair* no
+menu do ícone. A bandeja aparece na barra do GNOME; se não aparecer, falta a extensão de
+indicadores:
+
+```bash
+sudo apt install gnome-shell-extension-appindicator
+```
+
+#### Sem o pacote (outras distros ou desenvolvimento)
+
+Os scripts fazem o mesmo instalando em `~/.local`, sem root para o app:
+
+```bash
+sudo ./liberar-uinput.sh     # regra udev + grupo input (pede senha)
+./instalar-app.sh            # copia o app, atalho, ícones e início automático
+```
+
+Para gerar o pacote você mesmo: `./empacotar-deb.sh` (escreve em `dist/`).
 
 ### 2. No celular
 

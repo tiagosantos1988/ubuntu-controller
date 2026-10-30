@@ -73,9 +73,19 @@ def preparar_log() -> str:
 
 
 
-ARQUIVO_APP = os.path.join(
+# O atalho pode estar instalado so para o usuario (pelos scripts) ou para o
+# sistema inteiro (pelo pacote .deb, em /usr/share/applications). O interruptor
+# de inicio automatico copia o Exec desse arquivo, entao precisa achar os dois.
+ARQUIVO_APP_USUARIO = os.path.join(
     GLib.get_user_data_dir(), "applications", "controle-remoto.desktop"
 )
+ARQUIVO_APP_SISTEMA = "/usr/share/applications/controle-remoto.desktop"
+
+
+def arquivo_atalho() -> str:
+    if os.path.exists(ARQUIVO_APP_USUARIO):
+        return ARQUIVO_APP_USUARIO
+    return ARQUIVO_APP_SISTEMA
 ARQUIVO_AUTOSTART = os.path.join(
     GLib.get_user_config_dir(), "autostart", "controle-remoto.desktop"
 )
@@ -97,7 +107,7 @@ def definir_inicio_automatico(ativo: bool) -> bool:
         return True
 
     try:
-        with open(ARQUIVO_APP, encoding="utf-8") as arquivo:
+        with open(arquivo_atalho(), encoding="utf-8") as arquivo:
             linhas = arquivo.readlines()
     except OSError:
         return False

@@ -78,7 +78,7 @@ app nativo, em jogo e na tela de bloqueio, sem pedir permissão a cada sessão.
 |---|---|---|
 | App Android | **Kotlin 2.1 + Jetpack Compose** (Material 3), `minSdk 26` | UI declarativa para uma tela cheia de gestos; uma única biblioteca externa (`zxing-android-embedded`, para ler o QR) |
 | Rede | **TCP + NDJSON** — uma linha JSON por comando | Sem HTTP, TLS ou framework do lado do celular: um socket e um `BufferedReader`. Menos APK, menos bateria |
-| Agente | **Python 3.14 + asyncio** | Servidor TCP concorrente em ~350 linhas, sem dependência além de `python-evdev` |
+| Agente | **Python 3.14 + asyncio** | Servidor TCP concorrente em ~400 linhas, sem dependência além de `python-evdev` |
 | Injeção | **`/dev/uinput` com `python-evdev`** | Único caminho independente de compositor: X11, Wayland, jogos e tela de login |
 | Acentuação | **libxkbcommon + tabelas Compose do X11** via `ctypes` | Gera um mapa `caractere → sequência de keycodes` a partir do layout real da máquina, em vez de adivinhar posições |
 | App do Ubuntu | **GTK4 + libadwaita** (PyGObject) | Mesma linguagem visual do GNOME; janela com QR, status e início automático |
@@ -133,8 +133,9 @@ use *Sair* no menu do ícone.
 
 ### 2. No celular
 
-Compile (`cd android && ./gradlew assembleDebug`) ou baixe o APK, instale (o sistema pede
-para permitir "fontes desconhecidas") e abra. Na primeira vez, aponte a câmera para o
+Compile com `cd android && ./gradlew assembleDebug` — o APK sai em
+`android/app/build/outputs/apk/debug/`. Instale no celular (o sistema pede para permitir
+"fontes desconhecidas") e abra. Na primeira vez, aponte a câmera para o
 **QR code** da janela do Ubuntu — ou digite IP, porta e token à mão.
 
 O QR carrega `CR1|ip|porta|token`, um formato curto de propósito: 37 módulos, mais fácil
@@ -304,6 +305,8 @@ python3 teste_dois_controles.py # dois celulares, dois controles, sem interferê
 ## Licença e créditos
 
 Código sob **[MIT](LICENSE)** — use, modifique, publique, só mantenha o aviso de copyright.
+
+Feito por **Tiago Santos** · [github.com/tiagosantos1988](https://github.com/tiagosantos1988)
 
 - Ícones das abas: **[Material Symbols](https://fonts.google.com/icons)** (Apache 2.0),
   com o crédito nos próprios arquivos vetoriais.

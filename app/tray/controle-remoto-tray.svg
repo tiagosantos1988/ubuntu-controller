@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <!-- Icone da BANDEJA, na mesma paleta do icone do app: azul claro
+       (#4FC3F7) sobre azul escuro (#0B1220). Desenhado para ~16 px, onde o
+       icone detalhado do aplicativo vira borrao: corpo quase quadrado, um
+       circulo no lugar do simbolo e tres teclas em fila. -->
+  <rect width="16" height="16" rx="4" fill="#0B1220"/>
+  <defs>
+    <mask id="recorte">
+      <rect width="16" height="16" fill="black"/>
+      <rect x="3" y="2.4" width="10" height="11" rx="2.8" fill="white"/>
+      <circle cx="8" cy="6.3" r="2.0" fill="black"/>
+      <rect x="4.5" y="10.1" width="1.8" height="1.5" rx="0.6" fill="black"/>
+      <rect x="7.1" y="10.1" width="1.8" height="1.5" rx="0.6" fill="black"/>
+      <rect x="9.7" y="10.1" width="1.8" height="1.5" rx="0.6" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="16" height="16" fill="#4FC3F7" mask="url(#recorte)"/>
+  <!-- emissor: metade para fora da borda -->
+  <circle cx="8" cy="2.4" r="1.1" fill="#E95420"/>
+</svg>

@@ -1,0 +1,16 @@
+# Build do Android (regeneravel com ./gradlew assembleDebug)
+android/build/
+android/app/build/
+android/.gradle/
+android/.kotlin/
+android/local.properties
+
+# Python
+__pycache__/
+*.pyc
+
+# APK gerado: distribua por Releases, nao no historico
+*.apk
+
+# Sistema
+.DS_Store

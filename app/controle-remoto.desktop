@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Ubuntu Controller
+GenericName=Phone remote for Ubuntu
+GenericName[pt_BR]=Controle remoto do celular
+Comment=Use your phone as keyboard, touchpad and gamepad for Ubuntu
+Comment[pt_BR]=Teclado, touchpad e joystick do celular para o Ubuntu
+Exec=/home/tsantos/.local/share/controle-remoto/controle_remoto.py
+Icon=controle-remoto
+Terminal=false
+Categories=Utility;RemoteAccess;
+Keywords=remote;controller;keyboard;touchpad;gamepad;android;cellphone;
+Keywords[pt_BR]=controle;remoto;teclado;touchpad;joystick;celular;android;
+StartupNotify=true
+StartupWMClass=br.com.tsantos.ControleRemoto

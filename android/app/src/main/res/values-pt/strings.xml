@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ubuntu Controller</string>
+
+    <string name="status_conectado">conectado</string>
+    <string name="status_conectando">conectando…</string>
+    <string name="status_desconectado">desconectado</string>
+    <string name="erro_token">token recusado</string>
+    <string name="erro_servidor">não é o agente</string>
+    <string name="erro_sem_resposta">sem resposta</string>
+    <string name="erro_conectar">sem conexão</string>
+    <string name="erro_endereco">endereço inválido</string>
+    <string name="erro_rede">falha de rede</string>
+
+    <string name="aba_touchpad">Touchpad</string>
+    <string name="aba_teclado">Teclado</string>
+    <string name="aba_joystick">Joystick</string>
+    <string name="config">Config</string>
+    <string name="tecla_super">Super</string>
+    <string name="controle_numero">Controle %1$d</string>
+
+    <string name="touchpad_dica">arraste para mover · toque para clicar\n2 dedos rolam · toque = clique direito\ndedo parado + outro dedo = arrastar item</string>
+
+    <string name="teclado_titulo">Teclado do Android</string>
+    <string name="teclado_dica">tudo que você digitar vai para o Ubuntu, tecla a tecla</string>
+    <string name="abrir_teclado">Abrir teclado</string>
+
+    <string name="config_titulo">Conectar ao Ubuntu</string>
+    <string name="config_intro">Preencha uma vez. Depois o app conecta sozinho.</string>
+    <string name="config_qr_botao">Escanear QR code do Ubuntu</string>
+    <string name="config_qr_prompt">Aponte para o QR code na janela do Ubuntu</string>
+    <string name="config_qr_invalido">Esse não é um QR code do Ubuntu Controller</string>
+    <string name="config_ou_manual">ou preencha manualmente:</string>
+    <string name="config_ip">IP do computador</string>
+    <string name="config_porta">Porta</string>
+    <string name="config_token">Token</string>
+    <string name="config_token_dica">32 caracteres, gerado pelo agente</string>
+    <string name="config_sensibilidade">Sensibilidade do touchpad</string>
+    <string name="config_sensibilidade_dica">ajuste até o cursor atravessar a tela com um movimento confortável</string>
+    <string name="config_salvar">Salvar e conectar</string>
+    <string name="config_voltar">Voltar sem alterar</string>
+    <string name="config_onde_token">Onde achar o token</string>
+    <string name="config_onde_token_texto">No Ubuntu, rode:\ncat ~/.config/controle-remoto/token\n\nO agente também registra IP, porta e token ao iniciar: ~/.local/state/controle-remoto/agente.log</string>
+</resources>

@@ -1,0 +1,5 @@
+# Libera /dev/uinput para criar teclado e mouse virtuais.
+#
+# TAG+="uaccess": concede ACL ao usuario da sessao ativa (efeito imediato).
+# GROUP/MODE: garantia via grupo "input" para o proximo login.
+KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"

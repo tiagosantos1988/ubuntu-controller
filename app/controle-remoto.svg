@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108">
+  <!-- Icone do aplicativo no Ubuntu. Mesmo desenho do app Android: controle
+       deitado (mais quadrado que o modelo fisico), emissor laranja na linha da
+       borda de cima vazando para fora, simbolo do Ubuntu no lugar do
+       direcional e uma fileira de tres botoes embaixo. -->
+  <rect width="108" height="108" rx="24" fill="#0B1220"/>
+
+  <!-- o desenho ocupa o miolo da placa; sem esta escala sobrava
+       espaço vazio em volta dele, comparado aos outros icones -->
+  <g transform="translate(54 54) scale(1.45) translate(-54 -54)">
+
+  <rect x="31" y="27" width="46" height="52" rx="12"
+        fill="#1D2733" stroke="#4FC3F7" stroke-width="3"/>
+  <g transform="translate(38.90 29.4) scale(0.953)">
+    <circle cx="7.18" cy="15.82" r="3.35" fill="#4FC3F7"/>
+    <circle cx="21.1" cy="8.48" r="3.35" fill="#4FC3F7"/>
+    <circle cx="20.35" cy="24.45" r="3.35" fill="#4FC3F7"/>
+    <path fill="#4FC3F7" d="M14.73,24.42a8.08,8.08,0,0,1-5.55-4.25,4.83,4.83,0,0,1-2.85.35,10.87,10.87,0,0,0,7.85,6.58,11,11,0,0,0,2.37.25,4.71,4.71,0,0,1-1-2.8A2.89,2.89,0,0,1,14.73,24.42Z"/>
+    <path fill="#4FC3F7" d="M25,23.23a11,11,0,0,0,.55-12.83,4.85,4.85,0,0,1-1.88,2.2,8.22,8.22,0,0,1,.78,5.55,8.08,8.08,0,0,1-1.05,2.6A4.58,4.58,0,0,1,25,23.23Z"/>
+    <path fill="#4FC3F7" d="M6.9,11h.25a4.65,4.65,0,0,1,1,.1,4.84,4.84,0,0,1,1.52.63,8.12,8.12,0,0,1,6.58-3.52,6.42,6.42,0,0,1,.1-.75,4.63,4.63,0,0,1,.92-1.95A11,11,0,0,0,6.9,11Z"/>
+  </g>
+
+  <rect x="36.5" y="63" width="9" height="6" rx="3" fill="#4FC3F7"/>
+  <rect x="49.5" y="63" width="9" height="6" rx="3" fill="#4FC3F7"/>
+  <rect x="62.5" y="63" width="9" height="6" rx="3" fill="#4FC3F7"/>
+
+  <!-- emissor infravermelho: metade para fora da borda -->
+    <circle cx="54" cy="25.6" r="2.8" fill="#E95420"/>
+  </g>
+</svg>
+

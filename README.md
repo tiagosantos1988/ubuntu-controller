@@ -159,6 +159,21 @@ sudo ./liberar-uinput.sh     # regra udev + grupo input (pede senha)
 
 Para gerar o pacote você mesmo: `./empacotar-deb.sh` (escreve em `dist/`).
 
+Se você já usava a instalação por script, remova antes para não ficarem duas cópias
+rodando (as duas têm o mesmo *app id* e disputariam a bandeja):
+
+```bash
+rm -rf ~/.local/share/controle-remoto
+rm -f ~/.local/share/applications/controle-remoto.desktop \
+      ~/.config/autostart/controle-remoto.desktop
+rm -f ~/.local/share/icons/hicolor/*/apps/controle-remoto.svg \
+      ~/.local/share/icons/hicolor/*/apps/controle-remoto-tray*.png
+```
+
+O token fica em `~/.config/controle-remoto/token` e **não é apagado** — os celulares
+continuam pareados. A participação no grupo `input` (que o script antigo criava) deixa de
+ser necessária e pode sair com `sudo gpasswd -d $USER input`.
+
 ### 2. No celular
 
 Baixe o APK da **[última release](https://github.com/tiagosantos1988/ubuntu-controller/releases/latest)**

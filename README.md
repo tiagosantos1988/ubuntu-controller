@@ -8,6 +8,7 @@
 ![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=flat-square&logo=python&logoColor=white)
 ![GTK4](https://img.shields.io/badge/GTK4%20%C2%B7%20libadwaita-77767B?style=flat-square&logo=gnome&logoColor=white)
 ![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-3DA639?style=flat-square)
+![CI](https://github.com/tiagosantos1988/ubuntu-controller/actions/workflows/ci.yml/badge.svg)
 
 ![As três telas do app](docs/banner.png)
 

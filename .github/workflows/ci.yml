@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Se dois pushes chegam juntos, o mais novo manda: o antigo nao precisa terminar.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    name: APK (assembleRelease)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: SDK do Android
+        uses: android-actions/setup-android@v3
+
+      # Sem keystore.properties o build cai para a chave de debug (ver
+      # app/build.gradle.kts): a CI prova que o projeto compila, sem guardar
+      # segredo nenhum no repositorio.
+      - name: Compilar
+        working-directory: android
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Guardar o APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+
+  protocolo:
+    name: Protocolo (agente simulado)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencias
+        run: pip install evdev
+
+      # O agente e o teste leem o mesmo arquivo de token; o teste cobre
+      # autenticacao, limites, comandos invalidos e os eixos do gamepad.
+      - name: Teste de fumaca
+        run: |
+          mkdir -p ~/.config/controle-remoto
+          echo "0123456789abcdef0123456789abcdef" > ~/.config/controle-remoto/token
+          chmod 600 ~/.config/controle-remoto/token
+          cd servidor
+          python3 agente.py --simular --porta 8799 > /tmp/agente.log 2>&1 &
+          sleep 3
+          python3 teste_protocolo.py --porta 8799 --token 0123456789abcdef0123456789abcdef
+          echo "--- log do agente"
+          cat /tmp/agente.log

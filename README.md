@@ -166,9 +166,15 @@ rodando (as duas têm o mesmo *app id* e disputariam a bandeja):
 rm -rf ~/.local/share/controle-remoto
 rm -f ~/.local/share/applications/controle-remoto.desktop \
       ~/.config/autostart/controle-remoto.desktop
-rm -f ~/.local/share/icons/hicolor/*/apps/controle-remoto.svg \
-      ~/.local/share/icons/hicolor/*/apps/controle-remoto-tray*.png
+rm -f ~/.local/share/icons/hicolor/*/apps/controle-remoto*.svg \
+      ~/.local/share/icons/hicolor/*/apps/controle-remoto*.png
+gtk-update-icon-cache -f -t ~/.local/share/icons/hicolor 2>/dev/null
 ```
+
+A última linha importa: `~/.local/share/icons` vem **antes** de `/usr/share/icons` na busca,
+e o cache de lá continuava anunciando os ícones antigos — apontando para arquivos já
+apagados. O resultado era o pior possível: o tema "achava" o ícone, mas não conseguia
+carregar, e tanto o ícone do menu quanto o da bandeja ficavam em branco.
 
 O token fica em `~/.config/controle-remoto/token` e **não é apagado** — os celulares
 continuam pareados. A participação no grupo `input` (que o script antigo criava) deixa de

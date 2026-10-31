@@ -230,8 +230,24 @@ class Bandeja:
             None,
         )
 
+        self._registrar_no_watcher()
+
+        # O watcher pode nascer depois do app (login em que o app sobe antes do
+        # shell) ou morrer e voltar (extensao desligada e religada). Sem
+        # re-registrar, o icone some da barra e so volta reiniciando o app.
+        conexao.signal_subscribe(
+            "org.freedesktop.DBus",
+            "org.freedesktop.DBus",
+            "NameOwnerChanged",
+            "/org/freedesktop/DBus",
+            "org.kde.StatusNotifierWatcher",
+            Gio.DBusSignalFlags.NONE,
+            self._ao_mudar_watcher,
+        )
+
+    def _registrar_no_watcher(self) -> None:
         try:
-            conexao.call_sync(
+            self._conexao.call_sync(
                 "org.kde.StatusNotifierWatcher",
                 "/StatusNotifierWatcher",
                 "org.kde.StatusNotifierWatcher",
@@ -244,6 +260,12 @@ class Bandeja:
             )
         except GLib.Error as exc:
             print(f"sem watcher de indicadores: {exc.message}", file=sys.stderr)
+
+    def _ao_mudar_watcher(self, _conexao, _remetente, _caminho, _interface,
+                          _sinal, parametros) -> None:
+        _nome, _antes, depois = parametros.unpack()
+        if depois:  # o watcher apareceu: entra na fila de novo
+            GLib.idle_add(self._registrar_no_watcher)
 
     def _adicionar_item(self, raiz, rotulo: str, acao) -> None:
         item = Dbusmenu.Menuitem.new()
